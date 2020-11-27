@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>golang快速入门(4) Array &amp; Slice | ZLOG.FUN</title>
+</head>
+
+<body>
+  <section class="page-header">
+  <h1 class="project-name">
+    ZLOG.FUN
+  </h1>
+  <h2 class="project-tagline">
+    培养写作习惯！
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/" class="btn">Blog</a>
+    
+      
+      
+      
+      
+      <a href="/tags/" class="btn">Tags</a>
+    
+      
+      
+      
+      
+      <a href="/about/" class="btn">About</a>
+    
+      
+      
+      
+      
+      <a href="/index.xml" class="btn">RSS</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>golang快速入门(4) Array &amp; Slice</h1>
+  <div>
+    
+    <strong>Publish date: </strong>2020-06-09
+  </div>
+  
+  
+    <div>
+      <strong>Tags: </strong>
+      
+        
+        
+        
+      
+      <a href="https://zlog-fun.github.io/tags/golang/">golang</a>
+    </div>
+  
+  <p>本节主要介绍数组(array)与切片(slice)，也比较让人困惑。go语言数组与切片都属于集合类的类型。但数组类型的声明长度必须给定，而且之后不会再改变。切片的长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减小。简而言之：<strong>数组是固定长度，切片是可变长度。</strong> go语言中切片可以看成数组的一个特例，这里表达不一定准备，大家自行体会吧。</p>
+<ul>
+<li>Array的使用</li>
+<li>Slice的使用</li>
+</ul>
+<h4 id="一array的使用">一、Array的使用</h4>
+<h5 id="11-数组定义">1.1 数组定义</h5>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 定一个长度位5的数组
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">var</span> arr [<span style="color:#666">5</span>]<span style="color:#b00040">int</span>
+	<span style="color:#408080;font-style:italic">// 初始化输出的数组会填充为0 [0 0 0 0 0]
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;arr:&#34;</span>, arr)
+
+	<span style="color:#408080;font-style:italic">// 给下标为4的数组赋值
+</span><span style="color:#408080;font-style:italic"></span>	arr[<span style="color:#666">4</span>] = <span style="color:#666">100</span>
+	<span style="color:#408080;font-style:italic">// 输出：set: [0 0 0 0 100]
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;set:&#34;</span>, arr)
+	<span style="color:#408080;font-style:italic">// get: 100
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;get:&#34;</span>, arr[<span style="color:#666">4</span>])
+	<span style="color:#408080;font-style:italic">// len获取数组长度 len: 5
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;len:&#34;</span>, <span style="color:#008000">len</span>(arr))
+
+	<span style="color:#408080;font-style:italic">// 带有值的数组定义
+</span><span style="color:#408080;font-style:italic"></span>	b <span style="color:#666">:=</span> [<span style="color:#666">5</span>]<span style="color:#b00040">int</span>{<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">3</span>, <span style="color:#666">4</span>, <span style="color:#666">5</span>}
+	<span style="color:#408080;font-style:italic">// dcl: [1 2 3 4 5]
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;dcl:&#34;</span>, b)
+
+	<span style="color:#408080;font-style:italic">// 二维数组定义
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">var</span> twoD [<span style="color:#666">2</span>][<span style="color:#666">3</span>]<span style="color:#b00040">int</span>
+	<span style="color:#008000;font-weight:bold">for</span> i <span style="color:#666">:=</span> <span style="color:#666">0</span>; i &lt; <span style="color:#666">2</span>; i<span style="color:#666">++</span> {
+		<span style="color:#008000;font-weight:bold">for</span> j <span style="color:#666">:=</span> <span style="color:#666">0</span>; j &lt; <span style="color:#666">3</span>; j<span style="color:#666">++</span> {
+			twoD[i][j] = i <span style="color:#666">+</span> j
+		}
+	}
+	<span style="color:#408080;font-style:italic">// 2d:  [[0 1 2] [1 2 3]]
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;2d: &#34;</span>, twoD)
+
+ 
+</code></pre></div><h5 id="12-数组遍历">1.2 数组遍历</h5>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">b <span style="color:#666">:=</span> [<span style="color:#666">5</span>]<span style="color:#b00040">int</span>{<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">3</span>, <span style="color:#666">4</span>, <span style="color:#666">5</span>}
+<span style="color:#408080;font-style:italic">// 普通的方式遍历
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">for</span> i <span style="color:#666">:=</span> <span style="color:#666">0</span>; i &lt; <span style="color:#008000">len</span>(b); i<span style="color:#666">++</span> {
+  fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;index:&#34;</span>, i, <span style="color:#ba2121">&#34;value:&#34;</span>, b[i])
+}
+<span style="color:#408080;font-style:italic">// 常见遍历方法
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">for</span> i, v <span style="color:#666">:=</span> <span style="color:#008000;font-weight:bold">range</span> b {
+  fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;index:&#34;</span>, i, <span style="color:#ba2121">&#34;value:&#34;</span>, v)
+}
+</code></pre></div><h4 id="二slice的使用">二、Slice的使用</h4>
+<p>在go语言中，你看到的切片的应用，一定是比数组多的，应用更为灵活和广泛。是go语言中关键的数据类型，提供了比数组更强大的接口。</p>
+<h5 id="11-切片定义">1.1 切片定义</h5>
+<p>定义一个切片[]string，即定义了一个类型为string的切片。切片本身比较灵活/</p>
+<pre><code>// 创建切片
+numbers := []int{0, 1, 2, 3, 4, 5, 6, 7, 8}
+// 打印原始切片
+fmt.Println(&quot;numbers ==&quot;, numbers) // numbers == [0 1 2 3 4 5 6 7 8]
+
+// 打印子切片从索引1(包含) 到索引4(不包含)
+fmt.Println(&quot;numbers[1:4] ==&quot;, numbers[1:4]) // numbers[1:4] == [1 2
+
+// 默认下限为 0
+fmt.Println(&quot;numbers[:3] ==&quot;, numbers[:3]) // numbers[:3] == [0 1 2]
+
+// 默认上限为 len(s)
+fmt.Println(&quot;numbers[4:] ==&quot;, numbers[4:]) // numbers[4:] == [4 5 6 7 8]
+</code></pre><h5 id="12-创建切片的几种方式">1.2 创建切片的几种方式</h5>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>方式</th>
+<th>代码示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>直接声明</td>
+<td><code>var slice []int</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>New</td>
+<td><code>slice := *new([]int)</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>字面量</td>
+<td><code>slice := []int{1,2,3,4,5}</code> 常用</td>
+</tr>
+<tr>
+<td>4</td>
+<td>make</td>
+<td><code>slice := make([]int, 5, 10)</code> 常用</td>
+</tr>
+<tr>
+<td>5</td>
+<td>从切片或数组“截取”</td>
+<td><code>slice := array[1:5]</code> 或 <code>slice := sourceSlice[1:5]</code></td>
+</tr>
+</tbody>
+</table>
+
+  
+
+
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    Made with <a href="https://gohugo.io/">Hugo</a>. Themed by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://www.github.com/">github</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+
+</body>
+</html>

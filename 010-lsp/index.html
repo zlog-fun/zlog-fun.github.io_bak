@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>010-Liskov-Substitution-Principle | ZLOG.FUN</title>
+</head>
+
+<body>
+  <section class="page-header">
+  <h1 class="project-name">
+    ZLOG.FUN
+  </h1>
+  <h2 class="project-tagline">
+    培养写作习惯！
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/" class="btn">Blog</a>
+    
+      
+      
+      
+      
+      <a href="/tags/" class="btn">Tags</a>
+    
+      
+      
+      
+      
+      <a href="/about/" class="btn">About</a>
+    
+      
+      
+      
+      
+      <a href="/index.xml" class="btn">RSS</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>010-Liskov-Substitution-Principle</h1>
+  <div>
+    
+    <strong>Publish date: </strong>2020-08-26
+  </div>
+  
+  
+    <div>
+      <strong>Tags: </strong>
+      
+        
+        
+        
+      
+      <a href="https://zlog-fun.github.io/tags/principles/">principles</a>
+    </div>
+  
+  <h3 id="里氏替换原则liskov-substitution-principlelsp">里氏替换原则（Liskov Substitution Principle，LSP）</h3>
+<p>里氏替换原则（Liskov Substitution Principle，LSP）由麻省理工学院计算机科学实验室的里斯科夫（Liskov）女士在 1987 年的“面向对象技术的高峰会议”（OOPSLA）上发表的一篇文章《数据抽象和层次》（Data Abstraction and Hierarchy）里提出来的，她提出：继承必须确保超类所拥有的性质在子类中仍然成立（Inheritance should ensure that any property proved about supertype objects also holds for subtype objects）。</p>
+<p>里氏替换原则主要阐述了有关继承的一些原则，也就是什么时候应该使用继承，什么时候不应该使用继承，以及其中蕴含的原理。里氏替换原是继承复用的基础，它反映了基类与子类之间的关系，是对开闭原则的补充，是对实现抽象化的具体步骤的规范。</p>
+<h3 id="里氏替换原则的作用">里氏替换原则的作用</h3>
+<ul>
+<li>里氏替换原则是实现开闭原则的重要方式之一</li>
+<li>它克服了继承中重写父类造成的可复用性变差的缺点</li>
+<li>它是动作正确性的保证。即类的扩展不会给已有的系统引入新的错误，降低了代码出错的可能性</li>
+</ul>
+<h3 id="里氏替换原则的实现方法">里氏替换原则的实现方法</h3>
+<p><strong>里氏替换原则通俗来讲就是：子类可以扩展父类的功能，但不能改变父类原有的功能</strong>。</p>
+<p>如果通过重写父类的方法来完成新的功能，这样写起来虽然简单，但是整个继承体系的可复用性会比较差，特别是运用多态比较频繁时，程序运行出错的概率会非常大。</p>
+<p>如果程序违背了里氏替换原则，则继承类的对象在基类出现的地方会出现运行错误。这时其修正方法是：取消原来的继承关系，重新设计它们之间的关系。</p>
+<p>关于里氏替换原则的例子，最有名的是“正方形不是长方形”。当然，生活中也有很多类似的例子，例如，企鹅、鸵鸟和几维鸟从生物学的角度来划分，它们属于鸟类；但从类的继承关系来看，由于它们不能继承“鸟”会飞的功能，所以它们不能定义成“鸟”的子类。同样，由于“气球鱼”不会游泳，所以不能定义成“鱼”的子类；“玩具炮”炸不了敌人，所以不能定义成“炮”的子类等。</p>
+<p>【例2】里氏替换原则在“几维鸟不是鸟”实例中的应用。</p>
+<p>分析：鸟一般都会飞行，如燕子的飞行速度大概是每小时 120 千米。但是新西兰的几维鸟由于翅膀退化无法飞行，飞行速度为0km。假如要设计一个实例，计算这两种鸟飞行 300 千米要花费的时间。显然，拿燕子来测试这段代码，结果正确，能计算出所需要的时间；但拿几维鸟来测试，结果会发生“除零异常”或是“无穷大”，明显不符合预期。</p>
+<p>如下图一：</p>
+<p><img src="/posts/lsp1.gif" alt="lsp1"></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">package</span> principles
+
+<span style="color:#008000;font-weight:bold">import</span> <span style="color:#ba2121">&#34;testing&#34;</span>
+
+<span style="color:#008000;font-weight:bold">type</span> Bird <span style="color:#008000;font-weight:bold">struct</span> {
+	flySpeed <span style="color:#b00040">int</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Bird) <span style="color:#00f">SetSpeed</span>(speed <span style="color:#b00040">int</span>) {
+	b.flySpeed = speed
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Bird) <span style="color:#00f">GetFlyTime</span>(distance <span style="color:#b00040">int</span>) <span style="color:#b00040">int</span> {
+	<span style="color:#008000;font-weight:bold">return</span> distance <span style="color:#666">/</span> b.flySpeed
+}
+
+<span style="color:#008000;font-weight:bold">type</span> Swallow <span style="color:#008000;font-weight:bold">struct</span> {
+	Bird
+}
+
+<span style="color:#008000;font-weight:bold">type</span> BrownKiwi <span style="color:#008000;font-weight:bold">struct</span> {
+	Bird
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>BrownKiwi) <span style="color:#00f">SetSpeed</span>(speed <span style="color:#b00040">int</span>) {
+	b.Bird.flySpeed = speed
+}
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">TestSwallow</span>(t <span style="color:#666">*</span>testing.T) {
+	<span style="color:#408080;font-style:italic">// 创建一个燕子
+</span><span style="color:#408080;font-style:italic"></span>	swallow <span style="color:#666">:=</span> Swallow{}
+	swallow.Bird.<span style="color:#00f">SetSpeed</span>(<span style="color:#666">120</span>)
+	t.<span style="color:#00f">Log</span>(<span style="color:#ba2121">&#34;swallow:&#34;</span>, swallow.<span style="color:#00f">GetFlyTime</span>(<span style="color:#666">600</span>), <span style="color:#ba2121">&#34;km/s&#34;</span>)
+
+	<span style="color:#408080;font-style:italic">// 创建一个kiwi  这个代码会报错，几维鸟不会飞哈哈
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#408080;font-style:italic">// brownKiwi := BrownKiwi{}
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#408080;font-style:italic">// brownKiwi.SetSpeed(0)
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#408080;font-style:italic">// t.Log(&#34;brownKiwi:&#34;, brownKiwi.GetFlyTime(600), &#34;km/s&#34;)
+</span><span style="color:#408080;font-style:italic"></span>}
+</code></pre></div><p>输出内容</p>
+<pre><code>=== RUN   TestSwallow
+--- PASS: TestSwallow (0.00s)
+    lsp_test.go:33: swallow: 5 km/s
+PASS
+   
+panic: runtime error: integer divide by zero [recovered]
+	panic: runtime error: integer divide by zero
+
+</code></pre><p>程序运行错误：几维鸟类重写了鸟类的 SetSpeed()方法，这违背了里氏替换原则。正确的做法是：取消几维鸟原来的继承关系，定义鸟和几维鸟的更一般的父类，如动物类，它们都有奔跑的能力。几维鸟的飞行速度虽然为 0，但奔跑速度不为 0，可以计算出其奔跑 300 千米所要花费的时间。</p>
+<p>如下图二：</p>
+<p><img src="/posts/lsp2.gif" alt="lsp1"></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">package</span> principles
+
+<span style="color:#008000;font-weight:bold">import</span> <span style="color:#ba2121">&#34;testing&#34;</span>
+
+<span style="color:#008000;font-weight:bold">type</span> Animal <span style="color:#008000;font-weight:bold">struct</span> {
+	runSpeed <span style="color:#b00040">int</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Animal) <span style="color:#00f">SetRunSpeed</span>(speed <span style="color:#b00040">int</span>) {
+	b.runSpeed = speed
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Animal) <span style="color:#00f">GetRunTime</span>(distance <span style="color:#b00040">int</span>) <span style="color:#b00040">int</span> {
+	<span style="color:#008000;font-weight:bold">return</span> distance <span style="color:#666">/</span> b.runSpeed
+}
+
+<span style="color:#008000;font-weight:bold">type</span> Bird <span style="color:#008000;font-weight:bold">struct</span> {
+	Animal
+	flySpeed <span style="color:#b00040">int</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Bird) <span style="color:#00f">SetFlySpeed</span>(speed <span style="color:#b00040">int</span>) {
+	b.flySpeed = speed
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Bird) <span style="color:#00f">GetFlyTime</span>(distance <span style="color:#b00040">int</span>) <span style="color:#b00040">int</span> {
+	<span style="color:#008000;font-weight:bold">return</span> distance <span style="color:#666">/</span> b.flySpeed
+}
+
+<span style="color:#008000;font-weight:bold">type</span> Swallow <span style="color:#008000;font-weight:bold">struct</span> {
+	Bird
+}
+
+<span style="color:#008000;font-weight:bold">type</span> BrownKiwi <span style="color:#008000;font-weight:bold">struct</span> {
+	Animal
+}
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">TestSwallow</span>(t <span style="color:#666">*</span>testing.T) {
+	<span style="color:#408080;font-style:italic">// 创建一个燕子
+</span><span style="color:#408080;font-style:italic"></span>	swallow <span style="color:#666">:=</span> Swallow{}
+	swallow.Bird.<span style="color:#00f">SetFlySpeed</span>(<span style="color:#666">120</span>)
+	t.<span style="color:#00f">Log</span>(<span style="color:#ba2121">&#34;swallow:&#34;</span>, swallow.<span style="color:#00f">GetFlyTime</span>(<span style="color:#666">600</span>), <span style="color:#ba2121">&#34;km/s&#34;</span>)
+
+	<span style="color:#408080;font-style:italic">// 创建一个kiwi
+</span><span style="color:#408080;font-style:italic"></span>	brownKiwi <span style="color:#666">:=</span> BrownKiwi{}
+	brownKiwi.<span style="color:#00f">SetRunSpeed</span>(<span style="color:#666">100</span>)
+	t.<span style="color:#00f">Log</span>(<span style="color:#ba2121">&#34;brownKiwi:&#34;</span>, brownKiwi.<span style="color:#00f">GetRunTime</span>(<span style="color:#666">600</span>), <span style="color:#ba2121">&#34;km/s&#34;</span>)
+}
+
+</code></pre></div><p>输出内容</p>
+<pre><code>=== RUN   TestSwallow
+--- PASS: TestSwallow (0.00s)
+    lsp_test.go:42: swallow: 5 km/s
+    lsp_test.go:47: brownKiwi: 6 km/s
+PASS
+</code></pre>
+  
+
+
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    Made with <a href="https://gohugo.io/">Hugo</a>. Themed by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://www.github.com/">github</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+
+</body>
+</html>

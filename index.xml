@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on ZLOG.FUN</title>
+    <link>https://zlog-fun.github.io/</link>
+    <description>Recent content in Blog on ZLOG.FUN</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Sep 2020 20:52:33 +0800</lastBuildDate>
+    
+	<atom:link href="https://zlog-fun.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>014-Catalina macOS 10.15 下 CGO 不能运行的解决方案</title>
+      <link>https://zlog-fun.github.io/014-macos-10.15-go%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Tue, 15 Sep 2020 20:52:33 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/014-macos-10.15-go%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C/</guid>
+      <description>### golang fatal error: &amp;lsquo;CoreFoundation/CoreFoundation.h&amp;rsquo; file not found&amp;rdquo; Macos升级到10.15版本后，Catalina macOS 10.15 下 CGO 不能运行的解决方案
+/usr/local/go/src/crypto/x509/root_cgo_darwin.go:16:10: fatal error: &#39;CoreFoundation/CoreFoundation.h&#39; file not found 其原因是因为/System/Library/Frameworks/CoreFoundation.framework没有头文件导致
+解决方案：
+1、首先确认xcode是否升级到最新版本，在appstore中升级到最新
+2、执行 csrutil disable
+3、执行 sudo mount -uw /	# 根目录挂载为可读写
+4、将头文件ln 软链接到指定的目录
+cd /System/Library/Frameworks/CoreFoundation.framework ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers Headers ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Modules Modules cd /System/Library/Frameworks/Security.framework ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Security.framework/Headers Headers ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Security.framework/Modules Modules 完美解决！</description>
+    </item>
+    
+    <item>
+      <title>012-设计原则总结</title>
+      <link>https://zlog-fun.github.io/012-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Tue, 01 Sep 2020 23:54:52 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/012-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E6%80%BB%E7%BB%93/</guid>
+      <description>软件设计原则总结 一、原则定义 在软件开发中，为了提高软件系统的可维护性和可复用性，增加软件的可扩展性和灵活性。我们需要尽量根据以下7条原则开发程序。提高程序开发效率，降低软件的维护成本。以下对前面学习的设计原则做个简单的汇总。
+1、开闭原则
+ 软件实体应当对扩展开放，对修改关闭  2、里氏替换原则
+ 子类可以扩展父类的功能，但不能改变父类原有的功能  3、依赖倒置原则
+ 高层模块不应该依赖低层模块，两者都应该依赖其抽象；抽象不应该依赖细节，细节应该依赖抽象。（ 要面向接口编程，不要面向实现编程）  4、单一职责原则
+ 规定一个类应该有且仅有一个引起它变化的原因，否则类应该被拆分  5、接口隔离原则
+ 要为各个类建立它们需要的专用接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用  6、迪米特法则
+ 如果两个软件实体无须直接通信，那么就不应当发生直接的相互调用，可以通过第三方转发该调用  7、合成复用原则的定义
+ 要求在软件复用时，要尽量先使用组合或者聚合等关联关系来实现，其次才考虑使用继承关系来实现。  二、各个原则其他说明 继承复用和合成复用两种，继承复用虽然有简单和易实现的优点，但它也存在以下缺点：
+ 继承复用破坏了类的封装性。因为继承会将父类的实现细节暴露给子类，父类对子类是透明的，所以这种复用又称为“白箱”复用。 子类与父类的耦合度高。父类的实现的任何改变都会导致子类的实现发生变化，这不利于类的扩展与维护。 它限制了复用的灵活性。从父类继承而来的实现是静态的，在编译时已经定义，所以在运行时不可能发生变化。  组合或聚合复用优点
+ 它维持了类的封装性。因为成分对象的内部细节是新对象看不见的，所以这种复用又称为“黑箱”复用。 新旧类之间的耦合度低。这种复用所需的依赖较少，新对象存取成分对象的唯一方法是通过成分对象的接口。 复用的灵活性高。这种复用可以在运行时动态进行，新对象可以动态地引用与成分对象类型相同的对象。  </description>
+    </item>
+    
+    <item>
+      <title>011-Interface-Segregation-Principle</title>
+      <link>https://zlog-fun.github.io/011-isp/</link>
+      <pubDate>Fri, 28 Aug 2020 22:09:40 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/011-isp/</guid>
+      <description>接口隔离原则 接口隔离原则（Interface Segregation Principle，ISP）要求程序员尽量将臃肿庞大的接口拆分成更小的和更具体的接口，让接口中只包含客户感兴趣的方法。
+2002 年罗伯特·C.马丁给“接口隔离原则”的定义是：客户端不应该被迫依赖于它不使用的方法（Clients should not be forced to depend on methods they do not use）。该原则还有另外一个定义：一个类对另一个类的依赖应该建立在最小的接口上（The dependency of one class to another one should depend on the smallest possible interface）。
+以上两个定义的含义是：要为各个类建立它们需要的专用接口，而不要试图去建立一个很庞大的接口供所有依赖它的类去调用。
+接口隔离原则和单一职责都是为了提高类的内聚性、降低它们之间的耦合性，体现了封装的思想，但两者是不同的：
+ 单一职责原则注重的是职责，而接口隔离原则注重的是对接口依赖的隔离。 单一职责原则主要是约束类，它针对的是程序中的实现和细节；接口隔离原则主要约束接口，主要针对抽象和程序整体框架的构建。  接口隔离原则的优点 接口隔离原则是为了约束接口、降低类对接口的依赖性，遵循接口隔离原则有以下 5 个优点。
+ 将臃肿庞大的接口分解为多个粒度小的接口，可以预防外来变更的扩散，提高系统的灵活性和可维护性。 接口隔离提高了系统的内聚性，减少了对外交互，降低了系统的耦合性。 如果接口的粒度大小定义合理，能够保证系统的稳定性；但是，如果定义过小，则会造成接口数量过多，使设计复杂化；如果定义太大，灵活性降低，无法提供定制服务，给整体项目带来无法预料的风险。 使用多个专门的接口还能够体现对象的层次，因为可以通过接口的继承，实现对总接口的定义。 能减少项目工程中的代码冗余。过大的大接口里面通常放置许多不用的方法，当实现这个接口的时候，被迫设计冗余的代码。  接口隔离原则的实现方法 在具体应用接口隔离原则时，应该根据以下几个规则来衡量。
+ 接口尽量小，但是要有限度。一个接口只服务于一个子模块或业务逻辑。 为依赖接口的类定制服务。只提供调用者需要的方法，屏蔽不需要的方法。 了解环境，拒绝盲从。每个项目或产品都有选定的环境因素，环境不同，接口拆分的标准就不同深入了解业务逻辑。 提高内聚，减少对外交互。使接口用最少的方法去完成最多的事情。  </description>
+    </item>
+    
+    <item>
+      <title>010-Liskov-Substitution-Principle</title>
+      <link>https://zlog-fun.github.io/010-lsp/</link>
+      <pubDate>Wed, 26 Aug 2020 23:07:52 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/010-lsp/</guid>
+      <description>里氏替换原则（Liskov Substitution Principle，LSP） 里氏替换原则（Liskov Substitution Principle，LSP）由麻省理工学院计算机科学实验室的里斯科夫（Liskov）女士在 1987 年的“面向对象技术的高峰会议”（OOPSLA）上发表的一篇文章《数据抽象和层次》（Data Abstraction and Hierarchy）里提出来的，她提出：继承必须确保超类所拥有的性质在子类中仍然成立（Inheritance should ensure that any property proved about supertype objects also holds for subtype objects）。
+里氏替换原则主要阐述了有关继承的一些原则，也就是什么时候应该使用继承，什么时候不应该使用继承，以及其中蕴含的原理。里氏替换原是继承复用的基础，它反映了基类与子类之间的关系，是对开闭原则的补充，是对实现抽象化的具体步骤的规范。
+里氏替换原则的作用  里氏替换原则是实现开闭原则的重要方式之一 它克服了继承中重写父类造成的可复用性变差的缺点 它是动作正确性的保证。即类的扩展不会给已有的系统引入新的错误，降低了代码出错的可能性  里氏替换原则的实现方法 里氏替换原则通俗来讲就是：子类可以扩展父类的功能，但不能改变父类原有的功能。
+如果通过重写父类的方法来完成新的功能，这样写起来虽然简单，但是整个继承体系的可复用性会比较差，特别是运用多态比较频繁时，程序运行出错的概率会非常大。
+如果程序违背了里氏替换原则，则继承类的对象在基类出现的地方会出现运行错误。这时其修正方法是：取消原来的继承关系，重新设计它们之间的关系。
+关于里氏替换原则的例子，最有名的是“正方形不是长方形”。当然，生活中也有很多类似的例子，例如，企鹅、鸵鸟和几维鸟从生物学的角度来划分，它们属于鸟类；但从类的继承关系来看，由于它们不能继承“鸟”会飞的功能，所以它们不能定义成“鸟”的子类。同样，由于“气球鱼”不会游泳，所以不能定义成“鱼”的子类；“玩具炮”炸不了敌人，所以不能定义成“炮”的子类等。
+【例2】里氏替换原则在“几维鸟不是鸟”实例中的应用。
+分析：鸟一般都会飞行，如燕子的飞行速度大概是每小时 120 千米。但是新西兰的几维鸟由于翅膀退化无法飞行，飞行速度为0km。假如要设计一个实例，计算这两种鸟飞行 300 千米要花费的时间。显然，拿燕子来测试这段代码，结果正确，能计算出所需要的时间；但拿几维鸟来测试，结果会发生“除零异常”或是“无穷大”，明显不符合预期。
+如下图一：
+package principles import &amp;#34;testing&amp;#34; type Bird struct { flySpeed int } func (b *Bird) SetSpeed(speed int) { b.flySpeed = speed } func (b *Bird) GetFlyTime(distance int) int { return distance / b.</description>
+    </item>
+    
+    <item>
+      <title>009-Law-of-Demete</title>
+      <link>https://zlog-fun.github.io/009-lod/</link>
+      <pubDate>Tue, 18 Aug 2020 06:36:00 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/009-lod/</guid>
+      <description>LOD 迪米特法则  迪米特法则(Law of Demeter, LOD)，有时候也叫做最少知识原则(Least Knowledge Principle, LKP)，它的定义是: 一个软件实体应当尽可能少地与其它实体发生相互作用。产生于 1987 年美国东北大学（Northeastern University）的一个名为迪米特（Demeter）的研究项目，由伊恩·荷兰（Ian Holland）提出，被 UML 创始者之一的布奇（Booch）普及，后来又因为在经典著作《程序员修炼之道》（The Pragmatic Programmer）提及而广为人知。
+ 迪米特法则的定义是：只与你的直接朋友交谈，不跟“陌生人”说话（Talk only to your immediate friends and not to strangers）。其含义是：如果两个软件实体无须直接通信，那么就不应当发生直接的相互调用，可以通过第三方转发该调用。其目的是降低类之间的耦合度，提高模块的相对独立性。
+迪米特法则中的“朋友”是指：当前对象本身、当前对象的成员对象、当前对象所创建的对象、当前对象的方法参数等，这些对象同当前对象存在关联、聚合或组合关系，可以直接访问这些对象的方法。
+迪米特法则的优点 迪米特法则要求限制软件实体之间通信的宽度和深度，正确使用迪米特法则将有以下两个优点。
+ 降低了类之间的耦合度，提高了模块的相对独立性。 由于亲合度降低，从而提高了类的可复用率和系统的扩展性。  但是，过度使用迪米特法则会使系统产生大量的中介类，从而增加系统的复杂性，使模块之间的通信效率降低。所以，在釆用迪米特法则时需要反复权衡，确保高内聚和低耦合的同时，保证系统的结构清晰。
+迪米特法则的实现方法 从迪米特法则的定义和特点可知，它强调以下两点：
+ 从依赖者的角度来说，只依赖应该依赖的对象。 从被依赖者的角度说，只暴露应该暴露的方法。  在运用迪米特法则时要注意以下 6 点：
+ 在类的划分上，应该创建弱耦合的类。类与类之间的耦合越弱，就越有利于实现可复用的目标。 在类的结构设计上，尽量降低类成员的访问权限。 在类的设计上，优先考虑将一个类设置成不变类。 在对其他类的引用上，将引用其他对象的次数降到最低。 不暴露类的属性成员，而应该提供相应的访问器（set 和 get 方法） 谨慎使用序列化（Serializable）功能。  实例说明 明星与经纪人的关系实例
+分析：星由于全身心投入艺术，所以许多日常事务由经纪人负责处理，如与粉丝的见面会，与媒体公司的业务洽淡等。这里的经纪人是明星的朋友，而粉丝和媒体公司是陌生人，所以适合使用迪米特法则，类图如下
+代码实例：
+package principles import ( &amp;#34;fmt&amp;#34; &amp;#34;testing&amp;#34; ) // 明星 type Star struct { name string } func (s *Star) getName() string { return s.</description>
+    </item>
+    
+    <item>
+      <title>008 Dependency Inversion Principle</title>
+      <link>https://zlog-fun.github.io/008-dependency_inversion_principle/</link>
+      <pubDate>Thu, 13 Aug 2020 22:29:14 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/008-dependency_inversion_principle/</guid>
+      <description>依赖倒置原则 依赖倒置原则(DIP)由Robert C. Martin在1996年在 Dependency Inversion Principle中提出，他对此定义如下:
+ High level modules should not depend on low level modules. Both should depend on abstractions. Abstractions should not depend upon details. Details should depend on abstractions Robert C. Martin
+顶层模块不应该依赖底层模块。这2者都应该依赖于抽象。抽象不应该依赖于细节。细节应该依赖于抽象。
+ 程序要依赖于抽象接口，不要依赖于具体实现。简单的说就是要求对抽象进行编程，不要对实现进行编程。也被称作好莱坞原则：Don’t call me，I will call you.其核心思想是:要面向接口编程，不要面向实现编程。
+下面我看一个实例 Example:张三开车的例子，张三是一名司机，可以开不不同品牌的汽车。
+// 面向对象设计原则：DIP依赖倒置原则 // 司机可开任何汽车——依赖抽象/接口  // 汽车 Interface type ICar interface { run() } type Camary struct{} func (C Camary) run() { fmt.Println(&amp;#34;Camary runing&amp;#34;) } type Benz struct{} func (C Benz) run() { fmt.</description>
+    </item>
+    
+    <item>
+      <title>007 Single Responsibility Principle</title>
+      <link>https://zlog-fun.github.io/007-single-responsibility-principle/</link>
+      <pubDate>Fri, 31 Jul 2020 22:51:03 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/007-single-responsibility-principle/</guid>
+      <description>软件设计的两个基本准则：低耦合和高内聚
+ 什么是单一职责原则 单一职责原则，指的是一个类或者模块有只有一 个改变的原因。
+ 单一职责可以降低类的复杂性，提高代码可读性、可维护性  我们举例说明单一职责， 看下面一段代码,我们实现一个开关，开灯关灯的实例
+const ( // 打开状态 	STATE_OK int = 1 // 关闭状态 	STATE_ON int = 0 ) // 开关 type Button interface { // 获取状态 	GetState() string // 设置状态 	SetState(int) } // 灯泡 type Lamp struct { State string } // 获取灯泡状态 func (b *Lamp) GetState() string { return b.State } // 设置灯泡状态 func (b *Lamp) SetState(state int) { switch state { case STATE_OK: b.</description>
+    </item>
+    
+    <item>
+      <title>006 Open Close Principle</title>
+      <link>https://zlog-fun.github.io/006-open-close-principle/</link>
+      <pubDate>Tue, 28 Jul 2020 22:17:45 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/006-open-close-principle/</guid>
+      <description>开闭原则实践 开闭原则（Open Close Principle），开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。 所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。原文是这样的：Software entities should be open for extension，but closed for modification
+我们举例说明什么是开闭原则，以4s店销售汽车为例，其类图如图所示:
+以下我们以go语言实践如下列子
+ICar接口定义了汽车的两个属性：名称和价格。AudiCar是一个奥迪车的实现类，代表奥迪车的总称。Shop4S代表售卖的4S店
+ICar接口的代码清单如下
+type ICar interface { // 车名 	GetName() string // 价格 	GetPrice() int } 一般情况下4S店只出售一种品牌的车，这里用奥迪为例，代码清单如下
+type AudiCar struct { name string price int } func (b AudiCar) GetName() string { return b.name } func (b AudiCar) GetPrice() int { return b.price } 这里我们模拟一下4s店售车记录，写个测试
+func TestAudi_GetName(t *testing.T) { var ( list []ICar ) list = []ICar{} list = append(list, &amp;amp;AudiCar{&amp;#34;A6&amp;#34;, 130}) list = append(list, &amp;amp;AudiCar{&amp;#34;A8&amp;#34;, 343}) list = append(list, &amp;amp;AudiCar{&amp;#34;TT&amp;#34;, 60}) for _, v := range list { fmt.</description>
+    </item>
+    
+    <item>
+      <title>005 Design_principles</title>
+      <link>https://zlog-fun.github.io/005-design_principles/</link>
+      <pubDate>Wed, 22 Jul 2020 22:18:33 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/005-design_principles/</guid>
+      <description>面向对象的设计原则 设计原则是2002年 罗伯特·塞西尔·马丁 (Robert Cecil Martin)俗称“鲍伯叔叔” 敏捷软件开发：原则、模式与实践/软件工程实践丛书书中提到可重用的五大设计原则 - “SOLID”（英文首字母缩略字）:
+ Single Responsibility Principle - 单一职责 Open / Closed Principle - 开闭原则 Liskov Substitution Principle - 里氏替换原则 Interface Segregation Principle - 接口隔离原则 Dependency Inversion Principle - 依赖倒置原则  一、单一职责原则 该原则提出对象不应该承担太多职责，如果一个对象承担了太多的职责，至少存在以下两个缺点：
+ 一个职责的变化可能会削弱或者抑制这个类实现其他职责的能力； 当客户端需要该对象的某一个职责时，不得不将其他不需要的职责全都包含进来，从而造成冗余代码或代码的浪费。  单一职责的核心就是控制类的粒度大小、将对象解耦、提高其内聚性
+1、单一职责的优点  降低类的复杂度。一个类只负责一项职责，其逻辑肯定要比负责多项职责简单得多。 提高类的可读性。复杂性降低，自然其可读性会提高。 提高系统的可维护性。可读性提高，那自然更容易维护了。 变更引起的风险降低。变更是必然的，如果单一职责原则遵守得好，当修改一个功能时，可以显著降低对其他功能的影响。  2、单一职责原则的实现方法 单一职责原则是最简单但又最难运用的原则，需要设计人员发现类的不同职责并将其分离，再封装到不同的类或模块中。而发现类的多重职责需要设计人员具有较强的分析设计能力和相关重构经验。
+二、开闭原则 开闭原则（OCP）即对修改关闭，扩展开放。代码模块应该在修改代码的的情况下，进行代码的扩展。一般需要通过接口和抽象实现该效果。 开闭原则的含义是当应用的需求改变时，在不修改软件实体代码的源代码或二进制代码的前提下，可以扩展模块功能以满足需求。
+1、开闭原则的作用 开闭原则是面向对象设计的终极目标，它使软件设计有一定的适应性和灵活性。其作用如下：
+  对软件测试的影响
+遵守原则的情况下，测试可以只对扩展代码进行测试
+  可以提高代码的可复用性
+遵守原则，粒度越小，被复用的可能性越大
+  可以提高软件的可维护性
+遵守原则，其稳定性高，持续性强，从而易于维护和扩展</description>
+    </item>
+    
+    <item>
+      <title>golang快速入门(4) Array &amp; Slice</title>
+      <link>https://zlog-fun.github.io/004-golearning/</link>
+      <pubDate>Tue, 09 Jun 2020 23:14:36 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/004-golearning/</guid>
+      <description>本节主要介绍数组(array)与切片(slice)，也比较让人困惑。go语言数组与切片都属于集合类的类型。但数组类型的声明长度必须给定，而且之后不会再改变。切片的长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减小。简而言之：数组是固定长度，切片是可变长度。 go语言中切片可以看成数组的一个特例，这里表达不一定准备，大家自行体会吧。
+ Array的使用 Slice的使用  一、Array的使用 1.1 数组定义 // 定一个长度位5的数组 	var arr [5]int // 初始化输出的数组会填充为0 [0 0 0 0 0] 	fmt.Println(&amp;#34;arr:&amp;#34;, arr) // 给下标为4的数组赋值 	arr[4] = 100 // 输出：set: [0 0 0 0 100] 	fmt.Println(&amp;#34;set:&amp;#34;, arr) // get: 100 	fmt.Println(&amp;#34;get:&amp;#34;, arr[4]) // len获取数组长度 len: 5 	fmt.Println(&amp;#34;len:&amp;#34;, len(arr)) // 带有值的数组定义 	b := [5]int{1, 2, 3, 4, 5} // dcl: [1 2 3 4 5] 	fmt.</description>
+    </item>
+    
+    <item>
+      <title>golang快速入门(3) 流程控制</title>
+      <link>https://zlog-fun.github.io/003-golearning/</link>
+      <pubDate>Fri, 05 Jun 2020 23:04:06 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/003-golearning/</guid>
+      <description>go语言作为类C语言的一种，流程控制与其他编程语言没有什么不同，主要有以下几种控制结构
+ 选择结构if/Else 多分支选择结构switch 循转结构for  二、选择结构 条件语句是指定一个或多个条件，并通过测试条件是否为 true 来决定是否执行指定语句，并在条件为 false 的情况在执行另外的语句。
+package main import ( &amp;#34;fmt&amp;#34; ) func main() { // 1、简单选择结构 	if 5%2 == 0 { fmt.Println(&amp;#34;偶数&amp;#34;) } else { fmt.Println(&amp;#34;奇数&amp;#34;) } // 2、可以不使用else 	if 8%4 == 0 { fmt.Println(&amp;#34;8 可以被 4 整除&amp;#34;) } // 3、可以在语句中定义 	if num := 9; num &amp;lt; 0 { fmt.Println(num, &amp;#34;是一个负数&amp;#34;) } else if num &amp;lt; 10 { fmt.Println(num, &amp;#34;是个位数&amp;#34;) } else { fmt.</description>
+    </item>
+    
+    <item>
+      <title>golang快速入门(2) 数据类型</title>
+      <link>https://zlog-fun.github.io/002-golearning/</link>
+      <pubDate>Wed, 03 Jun 2020 07:55:47 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/002-golearning/</guid>
+      <description>本节主要介绍golang的数据类型的分类，让给大家对数据类型有个简要的概念，俗话说的好。基础不牢，地动山摇。
+一、数据类型 go语言数据类型分以下表格中四类，简单分，不同书籍上也有不同的说明：
+   类型 描述     布尔型 布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true。   数值类型 整型 int 和浮点型 float32、float64，Go 语言支持整型和浮点型数字，并且支持复数，其中位的运算采用补码。   字符串 字符串就是一串固定长度的字符连接起来的字符序列。Go 的字符串是由单个字节连接起来的。Go 语言的字符串的字节使用 UTF-8 编码标识 Unicode 文本。   派生类型 切片类型、接口类型、Map类型、数组类型、指针类型（Pointer）、结构化类型(struct)、Channel 类型、函数类型    1.1、布尔类型    类型 描述     bool 布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true    1.2、数值类型    类型 描述     byte 字节类型，类似uint8   rune 类似 int32,go语言定义特有的数据类型，用于存储unicode码   int/uint 有符号整数类型/无符号整数类型 （宽度与平台相关）   Int8/uint8 无符号 8 位整型 (0 到 255)/ 有符号 8 位整型 (-128 到 127)   int16/uint16 无符号 16 位整型 (0 到 65535)/有符号 16 位整型 (-32768 到 32767)   int32/uint32 无符号 32 位整型 (0 到 4294967295)/有符号 32 位整型 (-2147483648 到 2147483647)   Int64/uint64 无符号 64 位整型 (0 到 18446744073709551615)/有符号 64 位整型 (-9223372036854775808 到 9223372036854775807)   float32 IEEE-754 32位浮点型数   float64 IEEE-754 64位浮点型数   Complex64/complex128 32 位实数和虚数/64 位实数和虚数    1.</description>
+    </item>
+    
+    <item>
+      <title>golang快速入门(1) 前言</title>
+      <link>https://zlog-fun.github.io/001-golearning01/</link>
+      <pubDate>Tue, 02 Jun 2020 22:54:32 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/001-golearning01/</guid>
+      <description>1、教程简介 本教程目的：与看到本教程的人一起，学习golang这门语言，分享学习成果，和热爱编程的同志们一起成长。
+ Go是一种开放源代码编程语言，旨在构建简单，快速且可靠的软件。详细说明文章请参见golang官网
+ 2、Hello World 废话不多说，我们直接上代码，Everything is Hello World
+2.1 输入以下内容到hello-world.go
+package main import &amp;quot;fmt&amp;quot; func main() { fmt.Println(&amp;quot;Hello World!&amp;quot;) } 这就是一个完整的go的程序了
+2.2 在安装了golang环境的的命令行，执行以下命令
+# 直接运行程序 $ go run hello-world.go Hello World # 编译程序 $ go build hello-world.go # 执行程序 $ ./hello-world Hello World 3、恭喜你 如果你的输出结果和我一样，恭喜你，你已经学会了，和我达到一样的水平了。</description>
+    </item>
+    
+    <item>
+      <title>从何开始</title>
+      <link>https://zlog-fun.github.io/000-start/</link>
+      <pubDate>Tue, 02 Jun 2020 07:45:03 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/000-start/</guid>
+      <description>从何开始 不知道从何开始。
+  为什么要写 如果没有目的，那无法持续。那就先定一个自己的目标，工作外收入达100W，把Flag立在这。
+  锻炼思维，提升写作技巧
+ 坚持输出，不做字数，有主题的学习 文章编号使用3位16进制数表示 构建知识体系    编程技术输出
+ 编写学习教程 编程经验技术输出    Changelog  完成目标确认 2020.7.20 中断了了一个月了  </description>
+    </item>
+    
+    <item>
+      <title>谈一谈为什么要搭建这个BLOG</title>
+      <link>https://zlog-fun.github.io/startpage/</link>
+      <pubDate>Sun, 31 May 2020 20:52:33 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/startpage/</guid>
+      <description>背景 无意间看到陈素封的blog,坚持做一件事确实不容易。
+谈一谈为什么要写 反思了很久，为什么一直不能坚持呢，尝试过立flag，但是不久后就倒了，如此往复。 俗话说三十而立，已经是而立之间的我，怎么为接下来的生活做好规划，是一个非常重要的事情。
+ 尝试改变  第一件事坚持写作 做一件让自己刮目相看的事，如减肥    具体目标 第一件事 坚持写 坚持输出价值，是一个黔驴，也要💪
+ 每周不少于5篇  第二件事 减肥 不让自己变成一个油腻的中年胖子，保持健康
+ 目前体重78.9KG 目标体重70KG  </description>
+    </item>
+    
+    <item>
+      <title>开篇</title>
+      <link>https://zlog-fun.github.io/essay/</link>
+      <pubDate>Sun, 31 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zlog-fun.github.io/essay/</guid>
+      <description>Essay 开始自己的第一篇文章，坚持写作，坚持输出.</description>
+    </item>
+    
+  </channel>
+</rss>

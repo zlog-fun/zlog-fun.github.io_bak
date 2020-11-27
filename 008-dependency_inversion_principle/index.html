@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>008 Dependency Inversion Principle | ZLOG.FUN</title>
+</head>
+
+<body>
+  <section class="page-header">
+  <h1 class="project-name">
+    ZLOG.FUN
+  </h1>
+  <h2 class="project-tagline">
+    培养写作习惯！
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/" class="btn">Blog</a>
+    
+      
+      
+      
+      
+      <a href="/tags/" class="btn">Tags</a>
+    
+      
+      
+      
+      
+      <a href="/about/" class="btn">About</a>
+    
+      
+      
+      
+      
+      <a href="/index.xml" class="btn">RSS</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>008 Dependency Inversion Principle</h1>
+  <div>
+    
+    <strong>Publish date: </strong>2020-08-13
+  </div>
+  
+  
+    <div>
+      <strong>Tags: </strong>
+      
+        
+        
+        
+      
+      <a href="https://zlog-fun.github.io/tags/principles/">principles</a>
+    </div>
+  
+  <h3 id="依赖倒置原则">依赖倒置原则</h3>
+<p>依赖倒置原则(DIP)由Robert C. Martin在1996年在 <a href="http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod">Dependency Inversion Principle</a>中提出，他对此定义如下:</p>
+<blockquote>
+<p><em>High level modules should not depend on low level modules. Both should depend on abstractions. Abstractions should not depend upon details. Details should depend on abstractions</em>
+<em>Robert C. Martin</em></p>
+<p><em>顶层模块不应该依赖底层模块。这2者都应该依赖于抽象。抽象不应该依赖于细节。细节应该依赖于抽象。</em></p>
+</blockquote>
+<p>程序要依赖于抽象接口，不要依赖于具体实现。简单的说就是要求对抽象进行编程，不要对实现进行编程。也被称作好莱坞原则：Don’t call me，I will call you.其核心思想是:<strong>要面向接口编程，不要面向实现编程。</strong></p>
+<h4 id="下面我看一个实例">下面我看一个实例</h4>
+<p>Example:张三开车的例子，张三是一名司机，可以开不不同品牌的汽车。</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 面向对象设计原则：DIP依赖倒置原则
+</span><span style="color:#408080;font-style:italic">// 司机可开任何汽车——依赖抽象/接口
+</span><span style="color:#408080;font-style:italic"></span>
+<span style="color:#408080;font-style:italic">// 汽车 Interface
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> ICar <span style="color:#008000;font-weight:bold">interface</span> {
+	<span style="color:#00f">run</span>()
+}
+
+<span style="color:#008000;font-weight:bold">type</span> Camary <span style="color:#008000;font-weight:bold">struct</span>{}
+
+<span style="color:#008000;font-weight:bold">func</span> (C Camary) <span style="color:#00f">run</span>() {
+	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;Camary runing&#34;</span>)
+}
+
+<span style="color:#008000;font-weight:bold">type</span> Benz <span style="color:#008000;font-weight:bold">struct</span>{}
+
+<span style="color:#008000;font-weight:bold">func</span> (C Benz) <span style="color:#00f">run</span>() {
+	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;Benz runing&#34;</span>)
+}
+
+<span style="color:#408080;font-style:italic">// 司机 Interface
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> IDriver <span style="color:#008000;font-weight:bold">interface</span> {
+	<span style="color:#408080;font-style:italic">// 司机会驾驶的汽车
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#00f">Ddrive</span>(car ICar)
+}
+
+<span style="color:#008000;font-weight:bold">type</span> Driver <span style="color:#008000;font-weight:bold">struct</span> {
+	Name <span style="color:#b00040">string</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (D <span style="color:#666">*</span>Driver) <span style="color:#00f">Ddrive</span>(car ICar) {
+	fmt.<span style="color:#00f">Println</span>(D.Name)
+	car.<span style="color:#00f">run</span>()
+}
+
+</code></pre></div><p>调用</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">TestDriver</span>(t <span style="color:#666">*</span>testing.T) {
+	zhangsan <span style="color:#666">:=</span> principles.Driver{Name: <span style="color:#ba2121">&#34;zhangsan&#34;</span>}
+	car <span style="color:#666">:=</span> principles.Camary{}
+	zhangsan.<span style="color:#00f">Ddrive</span>(car)
+	car1 <span style="color:#666">:=</span> principles.Benz{}
+	zhangsan.<span style="color:#00f">Ddrive</span>(car1)
+}
+
+<span style="color:#666">---</span>
+<span style="color:#666">==</span>= RUN   TestDriver
+zhangsan
+Camary runing
+zhangsan
+Benz runing
+<span style="color:#666">---</span> PASS: <span style="color:#00f">TestDriver</span> (<span style="color:#666">0.00</span>s)
+</code></pre></div><p>看看以上代码。任意司机可以看任意品牌的汽车，相互之间没有依赖。各汽车之间也可进行定制开发，增加不同的功能。</p>
+<p>满足依赖倒置的原则：</p>
+<ul>
+<li>高层模块不应该依赖低层模块，都应该依赖抽象(接口或抽象类)</li>
+<li>接口或抽象类不应该依赖于实现类</li>
+<li>实现类应该依赖于接口或抽象类</li>
+</ul>
+
+  
+
+
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    Made with <a href="https://gohugo.io/">Hugo</a>. Themed by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://www.github.com/">github</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+
+</body>
+</html>

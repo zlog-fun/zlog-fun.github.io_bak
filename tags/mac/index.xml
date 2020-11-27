@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mac on ZLOG.FUN</title>
+    <link>https://zlog-fun.github.io/tags/mac/</link>
+    <description>Recent content in mac on ZLOG.FUN</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Sep 2020 20:52:33 +0800</lastBuildDate>
+    
+	<atom:link href="https://zlog-fun.github.io/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>014-Catalina macOS 10.15 下 CGO 不能运行的解决方案</title>
+      <link>https://zlog-fun.github.io/014-macos-10.15-go%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Tue, 15 Sep 2020 20:52:33 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/014-macos-10.15-go%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C/</guid>
+      <description>### golang fatal error: &amp;lsquo;CoreFoundation/CoreFoundation.h&amp;rsquo; file not found&amp;rdquo; Macos升级到10.15版本后，Catalina macOS 10.15 下 CGO 不能运行的解决方案
+/usr/local/go/src/crypto/x509/root_cgo_darwin.go:16:10: fatal error: &#39;CoreFoundation/CoreFoundation.h&#39; file not found 其原因是因为/System/Library/Frameworks/CoreFoundation.framework没有头文件导致
+解决方案：
+1、首先确认xcode是否升级到最新版本，在appstore中升级到最新
+2、执行 csrutil disable
+3、执行 sudo mount -uw /	# 根目录挂载为可读写
+4、将头文件ln 软链接到指定的目录
+cd /System/Library/Frameworks/CoreFoundation.framework ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers Headers ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Modules Modules cd /System/Library/Frameworks/Security.framework ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Security.framework/Headers Headers ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Security.framework/Modules Modules 完美解决！</description>
+    </item>
+    
+  </channel>
+</rss>

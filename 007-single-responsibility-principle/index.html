@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>007 Single Responsibility Principle | ZLOG.FUN</title>
+</head>
+
+<body>
+  <section class="page-header">
+  <h1 class="project-name">
+    ZLOG.FUN
+  </h1>
+  <h2 class="project-tagline">
+    培养写作习惯！
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/" class="btn">Blog</a>
+    
+      
+      
+      
+      
+      <a href="/tags/" class="btn">Tags</a>
+    
+      
+      
+      
+      
+      <a href="/about/" class="btn">About</a>
+    
+      
+      
+      
+      
+      <a href="/index.xml" class="btn">RSS</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>007 Single Responsibility Principle</h1>
+  <div>
+    
+    <strong>Publish date: </strong>2020-07-31
+  </div>
+  
+  
+    <div>
+      <strong>Tags: </strong>
+      
+        
+        
+        
+      
+      <a href="https://zlog-fun.github.io/tags/principles/">principles</a>
+    </div>
+  
+  <h2 id="heading"></h2>
+<blockquote>
+<p>软件设计的两个基本准则：低耦合和高内聚</p>
+</blockquote>
+<h3 id="什么是单一职责原则">什么是单一职责原则</h3>
+<p><strong>单一职责原则，指的是一个类或者模块有只有一 个改变的原因。</strong></p>
+<ul>
+<li>单一职责可以降低类的复杂性，提高代码可读性、可维护性</li>
+</ul>
+<p>我们举例说明单一职责， 看下面一段代码,我们实现一个开关，开灯关灯的实例</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#008000;font-weight:bold">const</span> (
+	<span style="color:#408080;font-style:italic">// 打开状态
+</span><span style="color:#408080;font-style:italic"></span>	STATE_OK <span style="color:#b00040">int</span> = <span style="color:#666">1</span>
+	<span style="color:#408080;font-style:italic">// 关闭状态
+</span><span style="color:#408080;font-style:italic"></span>	STATE_ON <span style="color:#b00040">int</span> = <span style="color:#666">0</span>
+)
+
+<span style="color:#408080;font-style:italic">// 开关
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> Button <span style="color:#008000;font-weight:bold">interface</span> {
+	<span style="color:#408080;font-style:italic">// 获取状态
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#00f">GetState</span>() <span style="color:#b00040">string</span>
+	<span style="color:#408080;font-style:italic">// 设置状态
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#00f">SetState</span>(<span style="color:#b00040">int</span>)
+}
+
+<span style="color:#408080;font-style:italic">// 灯泡
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> Lamp <span style="color:#008000;font-weight:bold">struct</span> {
+	State <span style="color:#b00040">string</span>
+}
+
+<span style="color:#408080;font-style:italic">// 获取灯泡状态
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Lamp) <span style="color:#00f">GetState</span>() <span style="color:#b00040">string</span> {
+	<span style="color:#008000;font-weight:bold">return</span> b.State
+}
+
+<span style="color:#408080;font-style:italic">// 设置灯泡状态
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Lamp) <span style="color:#00f">SetState</span>(state <span style="color:#b00040">int</span>) {
+	<span style="color:#008000;font-weight:bold">switch</span> state {
+	<span style="color:#008000;font-weight:bold">case</span> STATE_OK:
+		b.State = <span style="color:#ba2121">&#34;开灯&#34;</span>
+	<span style="color:#008000;font-weight:bold">case</span> STATE_ON:
+		b.State = <span style="color:#ba2121">&#34;关灯&#34;</span>
+	<span style="color:#008000;font-weight:bold">default</span>:
+		b.State = <span style="color:#ba2121">&#34;未知状态&#34;</span>
+	}
+}
+</code></pre></div><p>调用代码</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#008000;font-weight:bold">var</span> btn principles.Button
+	lamp <span style="color:#666">:=</span> principles.Lamp{State: <span style="color:#ba2121">&#34;关灯&#34;</span>}
+	<span style="color:#408080;font-style:italic">// 实现组合
+</span><span style="color:#408080;font-style:italic"></span>	btn = <span style="color:#666">&amp;</span>lamp
+
+	<span style="color:#408080;font-style:italic">// 开灯
+</span><span style="color:#408080;font-style:italic"></span>	btn.<span style="color:#00f">SetState</span>(<span style="color:#666">1</span>)
+	t.<span style="color:#00f">Log</span>(<span style="color:#ba2121">&#34;灯泡状态：&#34;</span>, btn.<span style="color:#00f">GetState</span>())
+
+	<span style="color:#408080;font-style:italic">// 关灯
+</span><span style="color:#408080;font-style:italic"></span>	btn.<span style="color:#00f">SetState</span>(<span style="color:#666">0</span>)
+	t.<span style="color:#00f">Log</span>(<span style="color:#ba2121">&#34;灯泡状态：&#34;</span>, btn.<span style="color:#00f">GetState</span>())
+<span style="color:#666">----------</span>
+<span style="color:#666">==</span>= RUN   TestButton_SetName
+<span style="color:#666">---</span> PASS: <span style="color:#00f">TestButton_SetName</span> (<span style="color:#666">0.00</span>s)
+    principles_test.<span style="color:#008000;font-weight:bold">go</span>:<span style="color:#666">122</span>: 灯泡状态<span style="">：</span> 开灯
+    principles_test.<span style="color:#008000;font-weight:bold">go</span>:<span style="color:#666">126</span>: 灯泡状态<span style="">：</span> 关灯
+</code></pre></div><p>在SetState这种实现在我们代码中就经常看见，由switch..case 的当时进行状态或逻辑处理。这里可以看出，我们这个函数是担任多个职责的，如果再新增一个状态，就要修个这个代码。如果是在复杂的代码中会变的难以维护。</p>
+<p>下面我们简单修改下，就行代码职责的修改</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 开关
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> Button <span style="color:#008000;font-weight:bold">interface</span> {
+	<span style="color:#408080;font-style:italic">// 获取状态
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#00f">GetState</span>() <span style="color:#b00040">string</span>
+	<span style="color:#408080;font-style:italic">// 开灯
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#00f">OpenState</span>()
+	<span style="color:#408080;font-style:italic">// 关
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#00f">CloseState</span>()
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Lamp) <span style="color:#00f">OpenState</span>() {
+	b.State = <span style="color:#ba2121">&#34;开灯&#34;</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (b <span style="color:#666">*</span>Lamp) <span style="color:#00f">CloseState</span>() {
+	b.State = <span style="color:#ba2121">&#34;开灯&#34;</span>
+}
+</code></pre></div><p>调用代码</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 开灯
+</span><span style="color:#408080;font-style:italic"></span>	btn.<span style="color:#00f">OpenState</span>()
+	t.<span style="color:#00f">Log</span>(<span style="color:#ba2121">&#34;灯泡状态：&#34;</span>, btn.<span style="color:#00f">GetState</span>())
+
+	<span style="color:#408080;font-style:italic">// 关灯
+</span><span style="color:#408080;font-style:italic"></span>	btn.<span style="color:#00f">CloseState</span>()
+	t.<span style="color:#00f">Log</span>(<span style="color:#ba2121">&#34;灯泡状态：&#34;</span>, btn.<span style="color:#00f">GetState</span>())
+</code></pre></div><p>看到这样代码，是不是感觉清晰了，如果在开灯的地方需要加一个延时打开灯泡的代码，是否不用关心关闭的代码。</p>
+<p>这就是软件设计的单一职责原则。如果一个类或者函数承担的职责太多，就等于把这些职责都耦合在一起。这种耦合会导致类很脆弱：当变化发生的时候，会引起类不必要的修改，进而导致 bug 出现。</p>
+<p>职责太多，还会导致类的代码太多。一个类太大，它就很难保证满足开闭原则，如果不得不打开类文件进行修改，大堆大堆的代码呈现在屏幕上，一不小心就会引出不必要的错误。</p>
+<p>写出好的代码的最佳实践，首先是<strong>控制一个文件的行数</strong></p>
+
+  
+
+
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    Made with <a href="https://gohugo.io/">Hugo</a>. Themed by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://www.github.com/">github</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+
+</body>
+</html>

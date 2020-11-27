@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on ZLOG.FUN</title>
+    <link>https://zlog-fun.github.io/tags/golang/</link>
+    <description>Recent content in golang on ZLOG.FUN</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 Jun 2020 23:14:36 +0800</lastBuildDate>
+    
+	<atom:link href="https://zlog-fun.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>golang快速入门(4) Array &amp; Slice</title>
+      <link>https://zlog-fun.github.io/004-golearning/</link>
+      <pubDate>Tue, 09 Jun 2020 23:14:36 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/004-golearning/</guid>
+      <description>本节主要介绍数组(array)与切片(slice)，也比较让人困惑。go语言数组与切片都属于集合类的类型。但数组类型的声明长度必须给定，而且之后不会再改变。切片的长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减小。简而言之：数组是固定长度，切片是可变长度。 go语言中切片可以看成数组的一个特例，这里表达不一定准备，大家自行体会吧。
+ Array的使用 Slice的使用  一、Array的使用 1.1 数组定义 // 定一个长度位5的数组 	var arr [5]int // 初始化输出的数组会填充为0 [0 0 0 0 0] 	fmt.Println(&amp;#34;arr:&amp;#34;, arr) // 给下标为4的数组赋值 	arr[4] = 100 // 输出：set: [0 0 0 0 100] 	fmt.Println(&amp;#34;set:&amp;#34;, arr) // get: 100 	fmt.Println(&amp;#34;get:&amp;#34;, arr[4]) // len获取数组长度 len: 5 	fmt.Println(&amp;#34;len:&amp;#34;, len(arr)) // 带有值的数组定义 	b := [5]int{1, 2, 3, 4, 5} // dcl: [1 2 3 4 5] 	fmt.</description>
+    </item>
+    
+    <item>
+      <title>golang快速入门(3) 流程控制</title>
+      <link>https://zlog-fun.github.io/003-golearning/</link>
+      <pubDate>Fri, 05 Jun 2020 23:04:06 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/003-golearning/</guid>
+      <description>go语言作为类C语言的一种，流程控制与其他编程语言没有什么不同，主要有以下几种控制结构
+ 选择结构if/Else 多分支选择结构switch 循转结构for  二、选择结构 条件语句是指定一个或多个条件，并通过测试条件是否为 true 来决定是否执行指定语句，并在条件为 false 的情况在执行另外的语句。
+package main import ( &amp;#34;fmt&amp;#34; ) func main() { // 1、简单选择结构 	if 5%2 == 0 { fmt.Println(&amp;#34;偶数&amp;#34;) } else { fmt.Println(&amp;#34;奇数&amp;#34;) } // 2、可以不使用else 	if 8%4 == 0 { fmt.Println(&amp;#34;8 可以被 4 整除&amp;#34;) } // 3、可以在语句中定义 	if num := 9; num &amp;lt; 0 { fmt.Println(num, &amp;#34;是一个负数&amp;#34;) } else if num &amp;lt; 10 { fmt.Println(num, &amp;#34;是个位数&amp;#34;) } else { fmt.</description>
+    </item>
+    
+    <item>
+      <title>golang快速入门(2) 数据类型</title>
+      <link>https://zlog-fun.github.io/002-golearning/</link>
+      <pubDate>Wed, 03 Jun 2020 07:55:47 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/002-golearning/</guid>
+      <description>本节主要介绍golang的数据类型的分类，让给大家对数据类型有个简要的概念，俗话说的好。基础不牢，地动山摇。
+一、数据类型 go语言数据类型分以下表格中四类，简单分，不同书籍上也有不同的说明：
+   类型 描述     布尔型 布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true。   数值类型 整型 int 和浮点型 float32、float64，Go 语言支持整型和浮点型数字，并且支持复数，其中位的运算采用补码。   字符串 字符串就是一串固定长度的字符连接起来的字符序列。Go 的字符串是由单个字节连接起来的。Go 语言的字符串的字节使用 UTF-8 编码标识 Unicode 文本。   派生类型 切片类型、接口类型、Map类型、数组类型、指针类型（Pointer）、结构化类型(struct)、Channel 类型、函数类型    1.1、布尔类型    类型 描述     bool 布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true    1.2、数值类型    类型 描述     byte 字节类型，类似uint8   rune 类似 int32,go语言定义特有的数据类型，用于存储unicode码   int/uint 有符号整数类型/无符号整数类型 （宽度与平台相关）   Int8/uint8 无符号 8 位整型 (0 到 255)/ 有符号 8 位整型 (-128 到 127)   int16/uint16 无符号 16 位整型 (0 到 65535)/有符号 16 位整型 (-32768 到 32767)   int32/uint32 无符号 32 位整型 (0 到 4294967295)/有符号 32 位整型 (-2147483648 到 2147483647)   Int64/uint64 无符号 64 位整型 (0 到 18446744073709551615)/有符号 64 位整型 (-9223372036854775808 到 9223372036854775807)   float32 IEEE-754 32位浮点型数   float64 IEEE-754 64位浮点型数   Complex64/complex128 32 位实数和虚数/64 位实数和虚数    1.</description>
+    </item>
+    
+    <item>
+      <title>golang快速入门(1) 前言</title>
+      <link>https://zlog-fun.github.io/001-golearning01/</link>
+      <pubDate>Tue, 02 Jun 2020 22:54:32 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/001-golearning01/</guid>
+      <description>1、教程简介 本教程目的：与看到本教程的人一起，学习golang这门语言，分享学习成果，和热爱编程的同志们一起成长。
+ Go是一种开放源代码编程语言，旨在构建简单，快速且可靠的软件。详细说明文章请参见golang官网
+ 2、Hello World 废话不多说，我们直接上代码，Everything is Hello World
+2.1 输入以下内容到hello-world.go
+package main import &amp;quot;fmt&amp;quot; func main() { fmt.Println(&amp;quot;Hello World!&amp;quot;) } 这就是一个完整的go的程序了
+2.2 在安装了golang环境的的命令行，执行以下命令
+# 直接运行程序 $ go run hello-world.go Hello World # 编译程序 $ go build hello-world.go # 执行程序 $ ./hello-world Hello World 3、恭喜你 如果你的输出结果和我一样，恭喜你，你已经学会了，和我达到一样的水平了。</description>
+    </item>
+    
+  </channel>
+</rss>

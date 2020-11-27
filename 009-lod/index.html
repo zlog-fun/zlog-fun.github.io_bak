@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>009-Law-of-Demete | ZLOG.FUN</title>
+</head>
+
+<body>
+  <section class="page-header">
+  <h1 class="project-name">
+    ZLOG.FUN
+  </h1>
+  <h2 class="project-tagline">
+    培养写作习惯！
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/" class="btn">Blog</a>
+    
+      
+      
+      
+      
+      <a href="/tags/" class="btn">Tags</a>
+    
+      
+      
+      
+      
+      <a href="/about/" class="btn">About</a>
+    
+      
+      
+      
+      
+      <a href="/index.xml" class="btn">RSS</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>009-Law-of-Demete</h1>
+  <div>
+    
+    <strong>Publish date: </strong>2020-08-18
+  </div>
+  
+  
+    <div>
+      <strong>Tags: </strong>
+      
+        
+        
+        
+      
+      <a href="https://zlog-fun.github.io/tags/principles/">principles</a>
+    </div>
+  
+  <h3 id="lod-迪米特法则">LOD 迪米特法则</h3>
+<blockquote>
+<p>迪米特法则(Law of Demeter, LOD)，有时候也叫做最少知识原则(Least Knowledge Principle, LKP)，它的定义是: 一个软件实体应当尽可能少地与其它实体发生相互作用。产生于 1987 年美国东北大学（Northeastern University）的一个名为迪米特（Demeter）的研究项目，由伊恩·荷兰（Ian Holland）提出，被 UML 创始者之一的布奇（Booch）普及，后来又因为在经典著作《程序员修炼之道》（The Pragmatic Programmer）提及而广为人知。</p>
+</blockquote>
+<p>迪米特法则的定义是：只与你的直接朋友交谈，不跟“陌生人”说话（Talk only to your immediate friends and not to strangers）。其含义是：如果两个软件实体无须直接通信，那么就不应当发生直接的相互调用，可以通过第三方转发该调用。其目的是降低类之间的耦合度，提高模块的相对独立性。</p>
+<p>迪米特法则中的“朋友”是指：当前对象本身、当前对象的成员对象、当前对象所创建的对象、当前对象的方法参数等，这些对象同当前对象存在关联、聚合或组合关系，可以直接访问这些对象的方法。</p>
+<h4 id="迪米特法则的优点">迪米特法则的优点</h4>
+<p>迪米特法则要求限制软件实体之间通信的宽度和深度，正确使用迪米特法则将有以下两个优点。</p>
+<ul>
+<li>降低了类之间的耦合度，提高了模块的相对独立性。</li>
+<li>由于亲合度降低，从而提高了类的可复用率和系统的扩展性。</li>
+</ul>
+<p>但是，过度使用迪米特法则会使系统产生大量的中介类，从而增加系统的复杂性，使模块之间的通信效率降低。所以，在釆用迪米特法则时需要反复权衡，确保高内聚和低耦合的同时，保证系统的结构清晰。</p>
+<h4 id="迪米特法则的实现方法">迪米特法则的实现方法</h4>
+<p>从迪米特法则的定义和特点可知，它强调以下两点：</p>
+<ul>
+<li>从依赖者的角度来说，只依赖应该依赖的对象。</li>
+<li>从被依赖者的角度说，只暴露应该暴露的方法。</li>
+</ul>
+<p>在运用迪米特法则时要注意以下 6 点：</p>
+<ol>
+<li>在类的划分上，应该创建弱耦合的类。类与类之间的耦合越弱，就越有利于实现可复用的目标。</li>
+<li>在类的结构设计上，尽量降低类成员的访问权限。</li>
+<li>在类的设计上，优先考虑将一个类设置成不变类。</li>
+<li>在对其他类的引用上，将引用其他对象的次数降到最低。</li>
+<li>不暴露类的属性成员，而应该提供相应的访问器（set 和 get 方法）</li>
+<li>谨慎使用序列化（Serializable）功能。</li>
+</ol>
+<h4 id="实例说明">实例说明</h4>
+<p>明星与经纪人的关系实例</p>
+<p>分析：星由于全身心投入艺术，所以许多日常事务由经纪人负责处理，如与粉丝的见面会，与媒体公司的业务洽淡等。这里的经纪人是明星的朋友，而粉丝和媒体公司是陌生人，所以适合使用迪米特法则，类图如下</p>
+<p><img src="lod.gif" alt="image-20200825064902417"></p>
+<p>代码实例：</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">package</span> principles
+
+<span style="color:#008000;font-weight:bold">import</span> (
+	<span style="color:#ba2121">&#34;fmt&#34;</span>
+	<span style="color:#ba2121">&#34;testing&#34;</span>
+)
+
+<span style="color:#408080;font-style:italic">// 明星
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> Star <span style="color:#008000;font-weight:bold">struct</span> {
+	name <span style="color:#b00040">string</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (s <span style="color:#666">*</span>Star) <span style="color:#00f">getName</span>() <span style="color:#b00040">string</span> {
+	<span style="color:#008000;font-weight:bold">return</span> s.name
+}
+
+<span style="color:#408080;font-style:italic">// 公司
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> Company <span style="color:#008000;font-weight:bold">struct</span> {
+	name <span style="color:#b00040">string</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (s <span style="color:#666">*</span>Company) <span style="color:#00f">getName</span>() <span style="color:#b00040">string</span> {
+	<span style="color:#008000;font-weight:bold">return</span> s.name
+}
+
+<span style="color:#408080;font-style:italic">// 粉丝
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> Fans <span style="color:#008000;font-weight:bold">struct</span> {
+	name <span style="color:#b00040">string</span>
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (s <span style="color:#666">*</span>Fans) <span style="color:#00f">getName</span>() <span style="color:#b00040">string</span> {
+	<span style="color:#008000;font-weight:bold">return</span> s.name
+}
+
+<span style="color:#408080;font-style:italic">// 经纪人
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">type</span> Agent <span style="color:#008000;font-weight:bold">struct</span> {
+	myStar    Star
+	myCompany Company
+	myFans    Fans
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (a Agent) <span style="color:#00f">meeting</span>() {
+	fmt.<span style="color:#00f">Println</span>(a.myFans.<span style="color:#00f">getName</span>(), <span style="color:#ba2121">&#34;与&#34;</span>, a.myStar.<span style="color:#00f">getName</span>(), <span style="color:#ba2121">&#34;见面了&#34;</span>)
+}
+
+<span style="color:#008000;font-weight:bold">func</span> (a <span style="color:#666">*</span>Agent) <span style="color:#00f">business</span>() {
+	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;明星&#34;</span>, a.myStar.<span style="color:#00f">getName</span>(), <span style="color:#ba2121">&#34;去&#34;</span>, a.myCompany.<span style="color:#00f">getName</span>(), <span style="color:#ba2121">&#34;参加跑男&#34;</span>)
+}
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">TestLAD</span>(t <span style="color:#666">*</span>testing.T) {
+	star <span style="color:#666">:=</span> Star{name: <span style="color:#ba2121">&#34;dengchao&#34;</span>}
+	company <span style="color:#666">:=</span> Company{name: <span style="color:#ba2121">&#34;浙江卫士&#34;</span>}
+	fans <span style="color:#666">:=</span> Fans{name: <span style="color:#ba2121">&#34;路人甲&#34;</span>}
+
+	agent <span style="color:#666">:=</span> Agent{
+		myStar:    star,
+		myCompany: company,
+		myFans:    fans,
+	}
+
+	agent.<span style="color:#00f">meeting</span>()
+	agent.<span style="color:#00f">business</span>()
+}
+</code></pre></div><p>输出内容</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#666">===</span> RUN   TestLAD
+路人甲 与 dengchao 见面了
+明星 dengchao 去 浙江卫士 参加跑男
+--- PASS: TestLAD <span style="color:#666">(</span>0.00s<span style="color:#666">)</span>
+</code></pre></div>
+  
+
+
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    Made with <a href="https://gohugo.io/">Hugo</a>. Themed by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://www.github.com/">github</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+
+</body>
+</html>

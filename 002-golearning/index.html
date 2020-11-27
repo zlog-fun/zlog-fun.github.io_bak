@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>golang快速入门(2) 数据类型 | ZLOG.FUN</title>
+</head>
+
+<body>
+  <section class="page-header">
+  <h1 class="project-name">
+    ZLOG.FUN
+  </h1>
+  <h2 class="project-tagline">
+    培养写作习惯！
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/" class="btn">Blog</a>
+    
+      
+      
+      
+      
+      <a href="/tags/" class="btn">Tags</a>
+    
+      
+      
+      
+      
+      <a href="/about/" class="btn">About</a>
+    
+      
+      
+      
+      
+      <a href="/index.xml" class="btn">RSS</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>golang快速入门(2) 数据类型</h1>
+  <div>
+    
+    <strong>Publish date: </strong>2020-06-03
+  </div>
+  
+  
+    <div>
+      <strong>Tags: </strong>
+      
+        
+        
+        
+      
+      <a href="https://zlog-fun.github.io/tags/golang/">golang</a>
+    </div>
+  
+  <p>本节主要介绍golang的数据类型的分类，让给大家对数据类型有个简要的概念，俗话说的好。基础不牢，地动山摇。</p>
+<h3 id="一数据类型">一、数据类型</h3>
+<p>go语言数据类型分以下表格中四类，简单分，不同书籍上也有不同的说明：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>布尔型</td>
+<td>布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true。</td>
+</tr>
+<tr>
+<td>数值类型</td>
+<td>整型 int 和浮点型 float32、float64，Go 语言支持整型和浮点型数字，并且支持复数，其中位的运算采用补码。</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>字符串就是一串固定长度的字符连接起来的字符序列。Go 的字符串是由单个字节连接起来的。Go 语言的字符串的字节使用 UTF-8 编码标识 Unicode 文本。</td>
+</tr>
+<tr>
+<td>派生类型</td>
+<td>切片类型、接口类型、Map类型、数组类型、指针类型（Pointer）、结构化类型(struct)、Channel 类型、函数类型</td>
+</tr>
+</tbody>
+</table>
+<h4 id="11布尔类型">1.1、布尔类型</h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool</td>
+<td>布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true</td>
+</tr>
+</tbody>
+</table>
+<h4 id="12数值类型">1.2、数值类型</h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>字节类型，类似uint8</td>
+</tr>
+<tr>
+<td>rune</td>
+<td>类似 int32,go语言定义特有的数据类型，用于存储unicode码</td>
+</tr>
+<tr>
+<td>int/uint</td>
+<td>有符号整数类型/无符号整数类型 （宽度与平台相关）</td>
+</tr>
+<tr>
+<td>Int8/uint8</td>
+<td>无符号 8 位整型 (0 到 255)/ 有符号 8 位整型 (-128 到 127)</td>
+</tr>
+<tr>
+<td>int16/uint16</td>
+<td>无符号 16 位整型 (0 到 65535)/有符号 16 位整型 (-32768 到 32767)</td>
+</tr>
+<tr>
+<td>int32/uint32</td>
+<td>无符号 32 位整型 (0 到 4294967295)/有符号 32 位整型 (-2147483648 到 2147483647)</td>
+</tr>
+<tr>
+<td>Int64/uint64</td>
+<td>无符号 64 位整型 (0 到 18446744073709551615)/有符号 64 位整型 (-9223372036854775808 到 9223372036854775807)</td>
+</tr>
+<tr>
+<td>float32</td>
+<td>IEEE-754 32位浮点型数</td>
+</tr>
+<tr>
+<td>float64</td>
+<td>IEEE-754 64位浮点型数</td>
+</tr>
+<tr>
+<td>Complex64/complex128</td>
+<td>32 位实数和虚数/64 位实数和虚数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="13字符串类型">1.3、字符串类型</h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td>字符串就是一串固定长度的字符连接起来的字符序列,实际上就是一个字符串序列</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二细说类型">二、细说类型</h3>
+<h4 id="21-值类型说明">2.1、 值类型说明</h4>
+<p>go的变量类型包括字符串、整形、浮点、布尔，下面我们看一个简单的例子</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">package</span> main
+
+<span style="color:#008000;font-weight:bold">import</span> (
+	<span style="color:#ba2121">&#34;fmt&#34;</span>
+)
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+	
+	<span style="color:#408080;font-style:italic">// 字符串可以用加号连接
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#408080;font-style:italic">// golang
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;go&#34;</span> <span style="color:#666">+</span> <span style="color:#ba2121">&#34;lang&#34;</span>)
+	
+	<span style="color:#408080;font-style:italic">// 数值类型操作
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#408080;font-style:italic">// 1 + 1 = 2
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;1 + 1 =&#34;</span>, <span style="color:#666">1</span><span style="color:#666">+</span><span style="color:#666">1</span>)
+	<span style="color:#408080;font-style:italic">// 7.0 / 3.0 =  2.3333333333333335
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;7.0 / 3.0 = &#34;</span>, <span style="color:#666">7.0</span><span style="color:#666">/</span><span style="color:#666">3.0</span>)
+	
+	<span style="color:#408080;font-style:italic">// bool类型操作
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#408080;font-style:italic">// false
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#008000;font-weight:bold">true</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#008000;font-weight:bold">false</span>)
+	<span style="color:#408080;font-style:italic">// true
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(<span style="color:#008000;font-weight:bold">true</span> <span style="color:#666">||</span> <span style="color:#008000;font-weight:bold">false</span>)
+	<span style="color:#408080;font-style:italic">// false
+</span><span style="color:#408080;font-style:italic"></span>	fmt.<span style="color:#00f">Println</span>(!<span style="color:#008000;font-weight:bold">true</span>)
+}
+</code></pre></div><h4 id="22-变量">2.2、 变量</h4>
+<p>go语言的变量名由字母、数字、下划线组成，首个字符不能为数字。</p>
+<p>声明变量的关键字为<code>var</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 声明单个变量
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">var</span> identifier <span style="color:#008000;font-weight:bold">type</span>
+<span style="color:#408080;font-style:italic">// 声明多个变量
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">var</span> identifier1, identifier2 <span style="color:#008000;font-weight:bold">type</span>
+</code></pre></div><p>实例说明</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 定义变量
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">var</span> a = <span style="color:#ba2121">&#34;hello&#34;</span>
+<span style="color:#408080;font-style:italic">// 定义多个变量
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">var</span> b, c <span style="color:#b00040">int</span> = <span style="color:#666">1</span>, <span style="color:#666">2</span>
+
+<span style="color:#408080;font-style:italic">// 定一个不赋值的变量，
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">var</span> e <span style="color:#b00040">int</span>
+<span style="color:#408080;font-style:italic">// 没有初始化情况下，声明的变量为零值，int类型类型的零值为0
+</span><span style="color:#408080;font-style:italic"></span>fmt.<span style="color:#00f">Println</span>(d) <span style="color:#408080;font-style:italic">// 0
+</span><span style="color:#408080;font-style:italic"></span>
+<span style="color:#408080;font-style:italic">// := 的语法，是声明和初始化的简写方式
+</span><span style="color:#408080;font-style:italic"></span>e <span style="color:#666">:=</span> <span style="color:#ba2121">&#34;yuzl&#34;</span> <span style="color:#408080;font-style:italic">// 等价于 var e string = &#34;yuzl&#34;
+</span><span style="color:#408080;font-style:italic"></span>
+</code></pre></div><h4 id="23-常量">2.3、 常量</h4>
+<p>go的常量类型支持字符串、布尔、数值</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 常量声明
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">const</span> identifier [<span style="color:#008000;font-weight:bold">type</span>] = value  <span style="color:#408080;font-style:italic">// 如：const LENGTH int = 10
+</span></code></pre></div><p>实例说明</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#408080;font-style:italic">// 显式类型定义 
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">const</span> b <span style="color:#b00040">string</span> = <span style="color:#ba2121">&#34;abc&#34;</span>
+<span style="color:#408080;font-style:italic">// 隐式类型定义编译器自动推导类型
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">const</span> b = <span style="color:#ba2121">&#34;abc&#34;</span>
+
+<span style="color:#408080;font-style:italic">// 常量还可以做枚举方式
+</span><span style="color:#408080;font-style:italic"></span><span style="color:#008000;font-weight:bold">const</span> (
+    Unknown = <span style="color:#666">0</span>
+    Female = <span style="color:#666">1</span>
+    Male = <span style="color:#666">2</span>
+)
+</code></pre></div><p>本节主要是简要说明golang的常量定义，理清楚了就可以，当然里面还有很多数值类型，大家在尝试中多多练习。</p>
+
+  
+
+
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    Made with <a href="https://gohugo.io/">Hugo</a>. Themed by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://www.github.com/">github</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+
+</body>
+</html>

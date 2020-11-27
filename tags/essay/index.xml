@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>essay on ZLOG.FUN</title>
+    <link>https://zlog-fun.github.io/tags/essay/</link>
+    <description>Recent content in essay on ZLOG.FUN</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 Jun 2020 07:45:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://zlog-fun.github.io/tags/essay/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>从何开始</title>
+      <link>https://zlog-fun.github.io/000-start/</link>
+      <pubDate>Tue, 02 Jun 2020 07:45:03 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/000-start/</guid>
+      <description>从何开始 不知道从何开始。
+  为什么要写 如果没有目的，那无法持续。那就先定一个自己的目标，工作外收入达100W，把Flag立在这。
+  锻炼思维，提升写作技巧
+ 坚持输出，不做字数，有主题的学习 文章编号使用3位16进制数表示 构建知识体系    编程技术输出
+ 编写学习教程 编程经验技术输出    Changelog  完成目标确认 2020.7.20 中断了了一个月了  </description>
+    </item>
+    
+    <item>
+      <title>谈一谈为什么要搭建这个BLOG</title>
+      <link>https://zlog-fun.github.io/startpage/</link>
+      <pubDate>Sun, 31 May 2020 20:52:33 +0800</pubDate>
+      
+      <guid>https://zlog-fun.github.io/startpage/</guid>
+      <description>背景 无意间看到陈素封的blog,坚持做一件事确实不容易。
+谈一谈为什么要写 反思了很久，为什么一直不能坚持呢，尝试过立flag，但是不久后就倒了，如此往复。 俗话说三十而立，已经是而立之间的我，怎么为接下来的生活做好规划，是一个非常重要的事情。
+ 尝试改变  第一件事坚持写作 做一件让自己刮目相看的事，如减肥    具体目标 第一件事 坚持写 坚持输出价值，是一个黔驴，也要💪
+ 每周不少于5篇  第二件事 减肥 不让自己变成一个油腻的中年胖子，保持健康
+ 目前体重78.9KG 目标体重70KG  </description>
+    </item>
+    
+    <item>
+      <title>开篇</title>
+      <link>https://zlog-fun.github.io/essay/</link>
+      <pubDate>Sun, 31 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zlog-fun.github.io/essay/</guid>
+      <description>Essay 开始自己的第一篇文章，坚持写作，坚持输出.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Hugo 0.71.1" />
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  
+  
+  <link rel="stylesheet" href="https://zlog-fun.github.io/css/cayman.ea0e967413f3851071cc8ace3621bc4205fe8fa79b2abe3d7bf94ff2841f0d47.css">
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+  <title>golang快速入门(3) 流程控制 | ZLOG.FUN</title>
+</head>
+
+<body>
+  <section class="page-header">
+  <h1 class="project-name">
+    ZLOG.FUN
+  </h1>
+  <h2 class="project-tagline">
+    培养写作习惯！
+  </h2>
+  <nav>
+    
+    
+      
+      
+      
+      
+      <a href="/" class="btn">Blog</a>
+    
+      
+      
+      
+      
+      <a href="/tags/" class="btn">Tags</a>
+    
+      
+      
+      
+      
+      <a href="/about/" class="btn">About</a>
+    
+      
+      
+      
+      
+      <a href="/index.xml" class="btn">RSS</a>
+    
+  </nav>
+</section>
+
+  <section class="main-content">
+    
+  <h1>golang快速入门(3) 流程控制</h1>
+  <div>
+    
+    <strong>Publish date: </strong>2020-06-05
+  </div>
+  
+  
+    <div>
+      <strong>Tags: </strong>
+      
+        
+        
+        
+      
+      <a href="https://zlog-fun.github.io/tags/golang/">golang</a>
+    </div>
+  
+  <p>go语言作为类C语言的一种，流程控制与其他编程语言没有什么不同，主要有以下几种控制结构</p>
+<ul>
+<li>选择结构<code>if/Else</code></li>
+<li>多分支选择结构<code>switch</code></li>
+<li>循转结构<code>for</code></li>
+</ul>
+<h4 id="二选择结构">二、选择结构</h4>
+<p>条件语句是指定一个或多个条件，并通过测试条件是否为 true 来决定是否执行指定语句，并在条件为 false 的情况在执行另外的语句。</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">package</span> main
+
+<span style="color:#008000;font-weight:bold">import</span> (
+	<span style="color:#ba2121">&#34;fmt&#34;</span>
+)
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+	<span style="color:#408080;font-style:italic">// 1、简单选择结构
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">if</span> <span style="color:#666">5</span><span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> {
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;偶数&#34;</span>)
+	} <span style="color:#008000;font-weight:bold">else</span> {
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;奇数&#34;</span>)
+	}
+
+	<span style="color:#408080;font-style:italic">// 2、可以不使用else
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">if</span> <span style="color:#666">8</span><span style="color:#666">%</span><span style="color:#666">4</span> <span style="color:#666">==</span> <span style="color:#666">0</span> {
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;8 可以被 4 整除&#34;</span>)
+	}
+
+	<span style="color:#408080;font-style:italic">// 3、可以在语句中定义
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">if</span> num <span style="color:#666">:=</span> <span style="color:#666">9</span>; num &lt; <span style="color:#666">0</span> {
+		fmt.<span style="color:#00f">Println</span>(num, <span style="color:#ba2121">&#34;是一个负数&#34;</span>)
+	} <span style="color:#008000;font-weight:bold">else</span> <span style="color:#008000;font-weight:bold">if</span> num &lt; <span style="color:#666">10</span> {
+		fmt.<span style="color:#00f">Println</span>(num, <span style="color:#ba2121">&#34;是个位数&#34;</span>)
+	} <span style="color:#008000;font-weight:bold">else</span> {
+		fmt.<span style="color:#00f">Println</span>(num, <span style="color:#ba2121">&#34;10位数以上的数组&#34;</span>)
+	}
+}
+</code></pre></div><p>输出结果</p>
+<pre><code>奇数
+8 可以被 4 整除
+9 是个位数
+</code></pre><h4 id="三多分支选择结构">三、多分支选择结构</h4>
+<p>go语言中的switch语句更加灵活多变。go语言的语句还可以做进行类型判断</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">package</span> main
+
+<span style="color:#008000;font-weight:bold">import</span> (
+	<span style="color:#ba2121">&#34;fmt&#34;</span>
+	<span style="color:#ba2121">&#34;time&#34;</span>
+)
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+	i <span style="color:#666">:=</span> <span style="color:#666">2</span>
+	fmt.<span style="color:#00f">Print</span>(<span style="color:#ba2121">&#34;Write &#34;</span>, i, <span style="color:#ba2121">&#34; as \n&#34;</span>)
+	<span style="color:#408080;font-style:italic">// 1、go的switch 没有break
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">switch</span> i {
+	<span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">1</span>:
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;one&#34;</span>)
+	<span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">2</span>:
+		<span style="color:#408080;font-style:italic">// 进入这个分支
+</span><span style="color:#408080;font-style:italic"></span>		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;two&#34;</span>)
+	<span style="color:#008000;font-weight:bold">case</span> <span style="color:#666">3</span>:
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;three&#34;</span>)
+	}
+
+	<span style="color:#408080;font-style:italic">// 2、可以在同一个case语句中用逗号分割，表示多个条件
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">switch</span> time.<span style="color:#00f">Now</span>().<span style="color:#00f">Weekday</span>() {
+	<span style="color:#008000;font-weight:bold">case</span> time.Saturday, time.Sunday:
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;It&#39;s the weekend&#34;</span>)
+	<span style="color:#008000;font-weight:bold">default</span>:
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;It&#39;s a weekday&#34;</span>)
+	}
+
+	<span style="color:#408080;font-style:italic">// 3、default 默认分支与if/else类似
+</span><span style="color:#408080;font-style:italic"></span>	t <span style="color:#666">:=</span> time.<span style="color:#00f">Now</span>()
+	<span style="color:#008000;font-weight:bold">switch</span> {
+	<span style="color:#008000;font-weight:bold">case</span> t.<span style="color:#00f">Hour</span>() &lt; <span style="color:#666">12</span>:
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;It&#39;s before noon&#34;</span>)
+	<span style="color:#008000;font-weight:bold">default</span>:
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;It&#39;s after noon&#34;</span>)
+	}
+
+	<span style="color:#408080;font-style:italic">// 4、实现类型检测
+</span><span style="color:#408080;font-style:italic"></span>	whatAmI <span style="color:#666">:=</span> <span style="color:#008000;font-weight:bold">func</span>(i <span style="color:#008000;font-weight:bold">interface</span>{}) {
+		<span style="color:#008000;font-weight:bold">switch</span> t <span style="color:#666">:=</span> i.(<span style="color:#008000;font-weight:bold">type</span>) {
+		<span style="color:#008000;font-weight:bold">case</span> <span style="color:#b00040">bool</span>:
+			fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;I&#39;m a bool&#34;</span>)
+		<span style="color:#008000;font-weight:bold">case</span> <span style="color:#b00040">int</span>:
+			fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;I&#39;m an int&#34;</span>)
+		<span style="color:#008000;font-weight:bold">default</span>:
+			fmt.<span style="color:#00f">Printf</span>(<span style="color:#ba2121">&#34;Don&#39;t know type %T\n&#34;</span>, t)
+		}
+	}
+
+	<span style="color:#00f">whatAmI</span>(<span style="color:#008000;font-weight:bold">true</span>)
+	<span style="color:#00f">whatAmI</span>(<span style="color:#666">1</span>)
+	<span style="color:#00f">whatAmI</span>(<span style="color:#ba2121">&#34;hey&#34;</span>)
+}
+</code></pre></div><p>输出结果</p>
+<pre><code>Write 2 as 
+two
+It's the weekend
+It's after noon
+I'm a bool
+I'm an int
+Don't know type string
+</code></pre><h4 id="四循环结构">四、循环结构</h4>
+<p>go只有一种循环结构<code>for</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000;font-weight:bold">package</span> main
+
+<span style="color:#008000;font-weight:bold">import</span> (
+	<span style="color:#ba2121">&#34;fmt&#34;</span>
+)
+
+<span style="color:#008000;font-weight:bold">func</span> <span style="color:#00f">main</span>() {
+	<span style="color:#408080;font-style:italic">// 1、基本类型的循环结构
+</span><span style="color:#408080;font-style:italic"></span>	i <span style="color:#666">:=</span> <span style="color:#666">1</span>
+	<span style="color:#008000;font-weight:bold">for</span> i <span style="color:#666">&lt;=</span> <span style="color:#666">3</span> {
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;i = &#34;</span>, i)
+		i = i <span style="color:#666">+</span> <span style="color:#666">1</span>
+	}
+
+	<span style="color:#408080;font-style:italic">// 2. 常见的循环结构，带条件和赋值
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">for</span> j <span style="color:#666">:=</span> <span style="color:#666">10</span>; j <span style="color:#666">&gt;=</span> <span style="color:#666">5</span>; j<span style="color:#666">--</span> {
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;j = &#34;</span>, j)
+	}
+
+	<span style="color:#408080;font-style:italic">// 3. 不带任何条件的循环语句，类似while
+</span><span style="color:#408080;font-style:italic"></span>	loop <span style="color:#666">:=</span> <span style="color:#666">1</span>
+ 	<span style="color:#408080;font-style:italic">// 这是一个死循环的句型
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">for</span> {
+		<span style="color:#008000;font-weight:bold">if</span> loop &gt; <span style="color:#666">2</span> {
+      <span style="color:#408080;font-style:italic">// break 终止当前循环
+</span><span style="color:#408080;font-style:italic"></span>			<span style="color:#008000;font-weight:bold">break</span>
+		}
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;loop&#34;</span>, loop)
+		loop = loop <span style="color:#666">+</span> <span style="color:#666">1</span>
+	}
+  
+ 	<span style="color:#408080;font-style:italic">// 4. 跳过本次循环
+</span><span style="color:#408080;font-style:italic"></span>	<span style="color:#008000;font-weight:bold">for</span> n <span style="color:#666">:=</span> <span style="color:#666">0</span>; n <span style="color:#666">&lt;=</span> <span style="color:#666">5</span>; n<span style="color:#666">++</span> {
+		<span style="color:#008000;font-weight:bold">if</span> n<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> {
+			fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;continue n=&#34;</span>, n)
+      <span style="color:#408080;font-style:italic">// continue 跳过本次循环
+</span><span style="color:#408080;font-style:italic"></span>			<span style="color:#008000;font-weight:bold">continue</span>
+		}
+		fmt.<span style="color:#00f">Println</span>(<span style="color:#ba2121">&#34;n=&#34;</span>, n)
+	}
+}
+</code></pre></div><p>输出结果</p>
+<pre><code>i =  1
+i =  2
+i =  3
+j =  6
+j =  5
+loop 1
+loop 2
+continue n= 0
+n= 1
+continue n= 2
+n= 3
+continue n= 4
+n= 5
+</code></pre>
+  
+
+
+
+    <footer class="site-footer">
+  <span class="site-footer-credits">
+    Made with <a href="https://gohugo.io/">Hugo</a>. Themed by <a href="https://github.com/zwbetz-gh/cayman-hugo-theme">Cayman</a>. Deployed to <a href="https://www.github.com/">github</a>.
+  </span>
+</footer>
+
+  </section>
+  
+  
+
+</body>
+</html>
